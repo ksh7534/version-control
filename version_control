@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ "$1" = "" -o "$2" != "" ]
+then
+	if [ "$2" != "--verbose" ]
+	then
+		echo "Usage: $0 target_folder [--verbose]"
+		exit
+	fi
+fi
+
+# Start
+
+filename=$1.`date +%m%d%H%M`.tgz
+dir=`echo $1 | tr '[:lower:]' '[:upper:]'`_BACKUP
+echo "Creating tarball..."
+if [ "$2" = "--verbose" ]
+then
+	tar cvzf $dir/$filename $1
+	ls -alh $dir/$filename
+else
+	tar czf $dir/$filename $1
+	ls -alh $dir/$filename
+fi
+echo "Done!"
