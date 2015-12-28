@@ -13,6 +13,12 @@ fi
 
 filename=$1.`date +%m%d%H%M`.tgz
 dir=`echo $1 | tr '[:lower:]' '[:upper:]'`_BACKUP
+if [ ! -d "$dir"  ]
+then
+        echo "Directory $dir does not exist. Creating $dir..."
+        mkdir $dir
+fi
+
 echo "Creating tarball..."
 if [ "$2" = "--verbose" ]
 then
